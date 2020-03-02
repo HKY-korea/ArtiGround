@@ -10,11 +10,15 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "github:react-native-community/react-native-async-storage",
     "@react-native-community/masked-view": "^0.1.6",
+    "axios": "^0.19.2",
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.5.3",
+    "react-native-image-picker": "^2.2.1",
+    "react-native-imagepicker": "^2.0.0",
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.6.2",
     "react-native-safe-area-view": "^1.0.0",

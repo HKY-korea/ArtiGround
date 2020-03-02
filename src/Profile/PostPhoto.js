@@ -9,7 +9,9 @@ const PostPhoto = () => (
             style={styles.photo} />
         <View style={styles.boxContainer}>
             <View style={styles.contentStyle}>
-                <Image source={image['Like']} />
+                <Image 
+                    source={image['Like']} 
+                    style={{width: 16, height: 16}}/>
                 <Text style={styles.numberText}>609</Text>
                 <Image 
                     source={image['Comment']} 
@@ -17,7 +19,9 @@ const PostPhoto = () => (
                 <Text style={styles.numberText}>120</Text>
             </View>
             <View>
-                <Image source={image['More']} />
+                <Image 
+                    source={image['More']}
+                    style={{width: 3, height: 16}} />
             </View>
         </View>
     </View>
@@ -28,7 +32,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     boxContainer: {
-        height: 56,
+        height: 55,
         backgroundColor: '#fcdb98',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -47,7 +51,9 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     commentImage: {
-        marginLeft: 32
+        marginLeft: 32,
+        width: 16,
+        height: 16
     },
     contentStyle: {
         flexDirection: 'row',

@@ -27,7 +27,9 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageStyle: {
-        margin: 20
+        margin: 20,
+        height: 16,
+        width: 16
     },
     onClick: {
         width: 54,

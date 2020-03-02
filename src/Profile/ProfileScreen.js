@@ -9,53 +9,52 @@ import PostPhoto from './PostPhoto';
 import image from '../constants/image';
 
 class ProfileScreen extends Component {
-    static navigationOptions = {
-        tabBarIcon: ({ tintColor }) => (
-            <Image
-                source={image.ICON_PROFILE}
-                resizeMode='contain'
-            />
-        )
-    }
-
     constructor() {
         super();
     }
 
     render() {
+        const { navigation } = this.props;
         return (
-            <View style={styles.container}>
+            <ScrollView 
+                contentContainerStyle={styles.container}
+                showsVerticalScrollIndicator={false} >
                 <View style={styles.profileContainer}>
-                    <Profile />
-                    <Introduction />
-                    <ProfileSocialTab />
-                    <ProfileTabBar />
+                    <Profile navigation={navigation} />
+                    <View style={{marginTop: 20}}>
+                        <Introduction />
+                    </View>
+                    <View style={{marginTop: 20}}>
+                        <ProfileSocialTab />
+                    </View>
+                    <View style={{marginTop: 20}}>
+                        <ProfileTabBar />
+                    </View>
                 </View>
                 <View style={styles.representativePhotoContainer}>
                     <PostPhoto />
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        paddingBottom: 40
     },
     profileContainer: {
-        flex: 1.1,
+        flex: 1,
         marginTop: 40,
-        marginLeft: 32,
-        marginRight: 32,
-        justifyContent: 'space-between'
+        marginLeft: 30,
+        marginRight: 30
     },
     representativePhotoContainer: {
         flex: 1,
-        marginTop: 50,
-        marginLeft: 32,
-        marginRight: 32
+        marginTop: 40,
+        marginLeft: 30,
+        marginRight: 30
     }
 });
 

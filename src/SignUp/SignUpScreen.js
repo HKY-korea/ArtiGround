@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, AsyncStorage } from 'react-native';
+
 import BackButton from './BackButton';
 import SignUp from './SignUp';
 import Inputs from './Inputs';
 import SocialLoginBar from './SocialLoginBar';
 import Login from './Login';
 
+const userInfo = {username: 'admin', mail: 'admin@google.com', password: '123456789'}
+
 class SignUpScreen extends Component {
     constructor() {
         super();
         this.state = {
-            profileValue: '',
-            mailValue: '',
-            passwordValue: ''
+            username: '',
+            mail: '',
+            password: ''
         }
         this.backWard = this.backWard.bind(this);
         this.signUp = this.signUp.bind(this);
@@ -20,7 +23,7 @@ class SignUpScreen extends Component {
         this.twitterLogin = this.twitterLogin.bind(this);
         this.googleLogin = this.googleLogin.bind(this);
         this.login = this.login.bind(this);
-        this.profileChange = this.profileChange.bind(this);
+        this.usernameChange = this.usernameChange.bind(this);
         this.mailChange = this.mailChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
     }
@@ -45,27 +48,29 @@ class SignUpScreen extends Component {
         console.log('Successful Login');
     }
 
-    login() {
-        this.props.navigation.navigate('MainApp');
+    login = async() => {
+        if (userInfo.username === this.state.username && userInfo.mail === this.state.mail && userInfo.password === this.state.password) {
+            await AsyncStorage.setItem('isLoggedIn', '1');
+            this.props.navigation.navigate('app');
+        } else {
+            Alert.alert('Login', 'Login information is incorrect');
+        }
     }
 
-    profileChange(profileValue) {
-        console.log('Profile Value: ', profileValue);
-        this.setState({ profileValue });
+    usernameChange(username) {
+        this.setState({ username });
     }
 
-    mailChange(mailValue) {
-        console.log('Mail Value: ', mailValue);
-        this.setState({ mailValue });
+    mailChange(mail) {
+        this.setState({ mail });
     }
 
-    passwordChange(passwordValue) {
-        console.log('Password Value: ', passwordValue);
-        this.setState({ passwordValue });
+    passwordChange(password) {
+        this.setState({ password });
     }
 
     render() {
-        const { profileValue, mailValue, passwordValue } = this.state;
+        const { username, mail, password } = this.state;
 
         return (
             // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -74,10 +79,10 @@ class SignUpScreen extends Component {
                     <BackButton backWard={this.backWard} />
                     {/* <Header /> 작은 아티그라운드 로고 */} 
                     <Inputs
-                        profileValue={profileValue}
-                        mailValue={mailValue}
-                        passwordValue={passwordValue}
-                        profileChange={(text) => this.profileChange(text)}
+                        username={username}
+                        mail={mail}
+                        password={password}
+                        usernameChange={(text) => this.usernameChange(text)}
                         mailChange={(text) => this.mailChange(text)}
                         passwordChange={(text) => this.passwordChange(text)}/>
                     <SignUp signUp={this.signUp} />

@@ -1,6 +1,6 @@
 const image = {
     BackwardArrow: require('../image/BackwardArrow.png'),
-    FaceBookSB: require('../image/FaceBookSB.png'),
+    FacebookSB: require('../image/FacebookSB.png'),
     gSB: require('../image/g+SB.png'),
     LockSB: require('../image/LockSB.png'),
     MailSB: require('../image/MailSB.png'),
@@ -15,21 +15,23 @@ const image = {
     Message: require('../image/Message.png'),
     More: require('../image/More.png'),
 
-    Ex_Work1: require('../image/Ex_Work1.png'),
-    Ex_Work2: require('../image/Ex_Work2.png'),
-    Ex_Work3: require('../image/Ex_Work3.png'),
     Ex_Artist1: require('../image/Ex_Artist1.png'),
     Ex_Artist2: require('../image/Ex_Artist2.png'),
-    Ex_Sale1: require('../image/Ex_Sale1.png'),
-    Ex_Sale2: require('../image/Ex_Sale2.png'),
-    Ex_Sale3: require('../image/Ex_Sale3.png'),
     ScrollBar: require('../image/ScrollBar.png'),
 
     ICON_HOME: require('../image/Home.png'),
     ICON_ADDCONTENT: require('../image/AddContents.png'),
     ICON_PROFILE: require('../image/Profile.png'),
     ICON_HAMBURGER: require('../image/Hamburger.png'),
-    ICON_SEARCH: require('../image/Search.png')
+    ICON_SEARCH: require('../image/Search.png'),
+    ICON_CLICKEDSEARCH: require('../image/ClickedSearch.png'),
+    ICON_SETTING: require('../image/Setting.png'),
+    ICON_ALARM: require('../image/Alarm.png'),
+    ICON_BACKWARD1: require('../image/BackwardArrow(black).png'),
+
+    ARTILOGO: require('../image/ArtiLogo.png'),
+    
+    Ex_Profile_Picture: require('../image/ProfilePicture.png')
 }
 
 export default image;

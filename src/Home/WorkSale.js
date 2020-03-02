@@ -2,21 +2,18 @@ import React from 'react';
 import { View, StyleSheet, Text, ScrollView, Image } from 'react-native';
 import image from '../constants/image';
 
-const NewDesigner = () => (
+const WorkSale = ({ images }) => (
     <View>
-        <View style={styles.titleContainer}>
-            <Text style={styles.title}>Art Work Sales</Text>
-        </View>
         <ScrollView 
             horizontal={true}
             showsHorizontalScrollIndicator={false} 
             contentContainerStyle={styles.photoContainer} >
-            <Image source={image['Ex_Sale1']} style={styles.photoMargin} />
-            <Image source={image['Ex_Sale2']} style={styles.photoMargin} />
-            <Image source={image['Ex_Sale3']} style={styles.photoMargin} />
-            <Image source={image['Ex_Sale1']} style={styles.photoMargin} />
-            <Image source={image['Ex_Sale2']} style={styles.photoMargin} />
-            <Image source={image['Ex_Sale3']} style={styles.photoMargin} />
+            {images.map(image => (
+                <Image
+                    key={image}
+                    source={{ uri: image }}
+                    style={styles.photoStyle} />
+            ))}
         </ScrollView>
         <View style={styles.scrollBarStyle}>
             <Image source={image['ScrollBar']} />
@@ -31,22 +28,11 @@ const styles = StyleSheet.create({
         paddingEnd: 15,
         marginTop: 25
     },
-    photoMargin: {
-        marginHorizontal: 15
-    },
-    title: {
-        fontFamily: 'Helvetica',
-        fontSize: 20,
-        fontWeight: 'bold',
-        fontStyle: 'normal',
-        letterSpacing: 1.1,
-        textAlign: 'left',
-        color: '#1a1311',
-        marginTop: 30
-    },
-    titleContainer: {
-        paddingStart: 30,
-        flexDirection: 'row',
+    photoStyle: {
+        width: 111,
+        height: 111,
+        marginHorizontal: 15,
+        borderRadius: 16
     },
     scrollBarStyle: {
         flexDirection: 'row',
@@ -55,4 +41,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NewDesigner;
+export default WorkSale;

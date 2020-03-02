@@ -2,23 +2,29 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Input from './Input';
 
-const Inputs = ({ profileValue, mailValue, passwordValue, profileChange, mailChange, passwordChange }) => (
+const Inputs = ({ username, mail, password, usernameChange, mailChange, passwordChange }) => (
     <View style={styles.container}>
         <Input 
             imageSource='ProfileSB'
-            inputValue={profileValue}
-            inputChange={profileChange} />
+            inputValue={username}
+            inputChange={usernameChange}
+            isPassword={false}
+            placeholderText='username' />
         <View style={styles.mailSB}>
             <Input 
                 imageSource='MailSB'
-                inputValue={mailValue}
-                inputChange={mailChange} />
+                inputValue={mail}
+                inputChange={mailChange}
+                isPassword={false}
+                placeholderText='mail' />
         </View>
         <View style={styles.lockSB}>
             <Input 
                 imageSource='LockSB'
-                inputValue={passwordValue}
-                inputChange={passwordChange} />
+                inputValue={password}
+                inputChange={passwordChange}
+                isPassword={true}
+                placeholderText='password' />
         </View>
     </View>
 );

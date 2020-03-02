@@ -6,7 +6,7 @@ const SocialLoginBar = ({faceBookLogin, twitterLogin, googleLogin}) => (
     <View style={styles.container}>
         <View style={styles.rightMargin}>
             <SocialLoginButton 
-                imageSource='FaceBookSB'
+                imageSource='FacebookSB'
                 loginFunction={faceBookLogin} />
         </View>
         <SocialLoginButton 

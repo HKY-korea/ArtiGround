@@ -8,7 +8,9 @@ const BackButton = ({backWard}) => (
             underlayColor='#efefef'
             style={styles.button}
             onPress={backWard}>
-            <Image source={image['BackwardArrow']} />
+            <Image 
+                source={image['BackwardArrow']}
+                style={styles.imageStyle} />
         </TouchableHighlight>
     </View>
 );
@@ -26,6 +28,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffffff',
         borderRadius: 60
+    },
+    imageStyle: {
+        height: 16,
+        width: 16
     }
 });
 

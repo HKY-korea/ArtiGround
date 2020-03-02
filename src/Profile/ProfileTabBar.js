@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
 
 const ProfileTabBar = () => (
     <View style={styles.container}>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     box: {
-        width: 100,
+        width: (Dimensions.get('window').width - 60) / 3 - 5,
         height: 70,
         borderRadius: 16,
         backgroundColor: '#fcdb98',

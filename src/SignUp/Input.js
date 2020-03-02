@@ -2,16 +2,19 @@ import React from 'react';
 import { View, StyleSheet, Image, TextInput } from 'react-native';
 import image from '../constants/image';
 
-const Input = ({ imageSource, inputValue, inputChange }) => (
+const Input = ({ imageSource, inputValue, inputChange, isPassword, placeholderText }) => (
     <View style={styles.inputContainer}>
         <View style={styles.inputStyle}>
-            <Image source={image[imageSource]} />
+            <Image 
+                source={image[imageSource]} 
+                style={styles.imageStyle} />
             <TextInput 
                 style={styles.textInputStyle}
                 value={inputValue}
                 onChangeText={inputChange} 
-                placeholder="this is text input"
-                maxLength={20} />
+                placeholder={placeholderText}
+                maxLength={20}
+                secureTextEntry={isPassword} />
         </View>
         <View style={styles.line}></View>
     </View>
@@ -35,6 +38,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#f83900',
         backgroundColor: '#ffffff'
+    },
+    imageStyle: {
+        width: 16,
+        height: 16
     }
 });
 

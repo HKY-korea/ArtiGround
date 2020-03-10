@@ -6,10 +6,11 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import image from '../constants/image';
 
+import * as firebase from 'firebase';
+
 class SideMenu extends Component {
-    logOut = async() => {
-        await AsyncStorage.clear();
-        this.props.navigation.navigate('auth');
+    signOutUser = () => {
+        firebase.auth().signOut()
     }
 
     render() {
@@ -47,9 +48,10 @@ class SideMenu extends Component {
                         source={image.ICON_ALARM} 
                         style={{marginLeft: 40, width: 30, height: 30}} />
                     <Button
+                        transparent
                         style={{marginLeft: 40}}
-                        onPress={this.logOut}>
-                        <Text>Log Out</Text>
+                        onPress={this.signOutUser}>
+                        <Text style={{fontSize: 15}}>Log Out</Text>
                     </Button>
                 </View>
             </SafeAreaView>

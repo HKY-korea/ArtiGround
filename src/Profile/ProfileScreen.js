@@ -7,10 +7,31 @@ import ProfileTabBar from './ProfileTabBar';
 import PostPhoto from './PostPhoto';
 
 import image from '../constants/image';
+import Fire from '../Fire';
 
 class ProfileScreen extends Component {
     constructor() {
         super();
+        this.state = {
+            user: {}
+        }
+    }
+
+    unsubscribe = null
+
+    componentDidMount() {
+        const user = this.props.uid || Fire.shared.uid
+
+        this.unsubscribe = Fire.shared.firestore
+                                            .collection("users")
+                                            .doc(user)
+                                            .onSnapshot(doc => {
+                                                this.setState({ user: doc.data() })
+                                            })
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {
@@ -20,7 +41,9 @@ class ProfileScreen extends Component {
                 contentContainerStyle={styles.container}
                 showsVerticalScrollIndicator={false} >
                 <View style={styles.profileContainer}>
-                    <Profile navigation={navigation} />
+                    <Profile 
+                        navigation={navigation}
+                        user={this.state.user} />
                     <View style={{marginTop: 20}}>
                         <Introduction />
                     </View>

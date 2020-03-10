@@ -3,12 +3,16 @@ import { View, StyleSheet, Image, Text } from 'react-native';
 import { Button, Thumbnail } from 'native-base';
 import image from '../constants/image';
 
-const Profile = ({ navigation }) => (
+const Profile = ({ navigation, user }) => (
     <View style={styles.container}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Thumbnail source={image['EX_Profile']} />
+            <Button
+                style={styles.avatarPlaceholder}
+                onPress={() => navigation.navigate('AddProfile')}>
+                <Thumbnail source={user.avatar} />
+            </Button>
             <View style={styles.textContainer}>
-                <Text style={styles.nameText}>John Marlie</Text>
+                <Text style={styles.nameText}>{user.name}</Text>
                 <Text style={styles.jobText}>Designer</Text>
             </View>
         </View>
@@ -47,6 +51,12 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: 'left',
         color: '#694f0b'
+    },
+    avatarPlaceholder: {
+        width: 56,
+        height: 56,
+        backgroundColor: '#E1E2E6',
+        borderRadius: 50,
     }
 });
 

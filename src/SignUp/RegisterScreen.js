@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, Dimensions, Keyboard } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, Dimensions, Keyboard, AsyncStorage } from 'react-native';
 import { Button } from 'native-base';
 
 import image from '../constants/image';
 import Fire from '../Fire';
 
-import * as firebase from 'firebase';
+import UserPermissions from '../../utilities/UserPermissions';
+import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios';
 
 class RegisterScreen extends Component {
     constructor() {
@@ -21,15 +23,67 @@ class RegisterScreen extends Component {
         }
     }
 
-    handleSignUp = () => {
+    handlePickAvatar = async() => {
+        UserPermissions.getCameraPermissions()
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Image,
+            allowsEditing: true,
+            aspect: [1, 1]
+        })
+
+        if (!result.cancelled) {
+            this.setState({ user: {...this.state.user, avatar: result.uri }})
+        }
+    }
+
+    // handleSignUp = () => {
+    //     Keyboard.dismiss();
+
+    //     Fire.shared.createUser(this.state.user)
+    // }
+    
+    handleSignUp = async() => {
+        const { name, email, password } = this.state.user;
+        const body = {
+            username: name,
+            email: email, 
+            password: password
+        }
         Keyboard.dismiss();
 
-        Fire.shared.createUser(this.state.user)
+        axios
+            .post('http://52.205.45.114:3000/api/auth/register', body)
+            .then(res => {
+                console.log("회원가입 :", res.data.message)
+                if (res.data.message === 'registered successfully') {
+                    this.props.navigation.goBack();
+                } else if (res.data.message === 20) {
+                    this.setState({ errorMessage: '이메일 중복'})
+                }
+            })
+        // if res.data.message === registered successfully 
+        //  redirect => login
+        // else if res.data.message === 20
+        //  alert(이메일 중복!!!!)
     }
+
+    // handleSignUp = async() => {
+    //     await AsyncStorage.setItem("token", );
+    // }
 
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.avatarContainer}>
+                    <Button 
+                        style={styles.avatarButton}
+                        onPress={this.handlePickAvatar}>
+                        <Image 
+                            source={{ uri: this.state.user.avatar }} 
+                            style={styles.avatarImage} />
+                    </Button>
+                </View>
                 <View style={styles.form}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <Image 
@@ -137,6 +191,24 @@ const styles = StyleSheet.create({
         color: '#F83900',
         fontWeight: '400',
         textAlign: 'center'
+    },
+    avatarButton: {
+        width: 90, 
+        height: 90, 
+        borderRadius: 50, 
+        backgroundColor: '#efefef', 
+        borderColor: '#f8a600', 
+        borderWidth: 1   
+    },
+    avatarImage: {
+        width: 90, 
+        height: 90, 
+        borderRadius: 50
+    },
+    avatarContainer: {
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginTop: 20
     }
 });
 

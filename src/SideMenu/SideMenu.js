@@ -13,6 +13,11 @@ class SideMenu extends Component {
         firebase.auth().signOut()
     }
 
+    // signOutUser = async() => {
+    //     await AsyncStorage.clear();
+    //     this.props.navigation.navigate('auth');
+    // }
+
     render() {
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#F0EABA'}}>

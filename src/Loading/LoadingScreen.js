@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-import { View, Image, ActivityIndicator, StatusBar } from 'react-native';
+import { View, Image, ActivityIndicator, StatusBar, AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 import Fire from '../Fire';
 
 import image from '../constants/image';
 
 class LoadingScreen extends Component {
+    loadToken = async() => {
+        const token = await AsyncStorage.getItem("token");
+        this.props.navigation.navigate(token ? 'auth' : 'app')
+    }
+
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.props.navigation.navigate(user ? "app" : "auth")
-        })
+        // firebase.auth().onAuthStateChanged(user => {
+        //     this.props.navigation.navigate(user ? "app" : "auth")
+        // })
+        this.loadToken();
     }
 
     render() {

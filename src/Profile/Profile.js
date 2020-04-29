@@ -9,7 +9,7 @@ const Profile = ({ navigation, user }) => (
             <Button
                 style={styles.avatarPlaceholder}
                 onPress={() => navigation.navigate('AddProfile')}>
-                <Thumbnail source={user.avatar} />
+                <Thumbnail source={{uri: user.avatar}} />
             </Button>
             <View style={styles.textContainer}>
                 <Text style={styles.nameText}>{user.name}</Text>

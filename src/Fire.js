@@ -56,6 +56,8 @@ class Fire {
     }
 
     createUser = async user => {
+        let remoteUri = null;
+
         try { 
             await firebase
                     .auth()
@@ -70,23 +72,11 @@ class Fire {
                 email: user.email,
                 avatar: null
             })
-        } catch (error) {
-            alert("Error: ", error)
-        }
-    }
 
-    addAvatar = async avatar => {
-        let remoteUri = null
+            if (user.avatar) {
+                remoteUri = await this.uploadPhotoAsync(user.avatar, `avatars/${this.uid}`);
 
-        try {
-            let db = this.firestore
-                            .collection("users")
-                            .doc(this.uid)
-
-            if (avatar) {
-                remoteUri = await this.uploadPhotoAsync(avatar, `avatars/${this.uid}`)
-
-                db.set({avatar: remoteUri}, {merge: true})
+                db.set({ avatar: remoteUri }, { merge: true })
             }
         } catch (error) {
             alert("Error: ", error)

@@ -3,8 +3,6 @@ import { View, Text, Image, StyleSheet, SafeAreaView, TextInput, ScrollView, Dim
 import { Button } from 'native-base';
 
 import image from '../constants/image';
-import Constants from 'expo-constants';
-import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import Fire from '../Fire';
 import UserPermissions from '../../utilities/UserPermissions';
@@ -28,7 +26,8 @@ class PostScreen extends Component {
   pickImage = async() => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true
+      allowsEditing: true,
+      aspect: [4, 3]
     })
 
     if (!result.cancelled) {
@@ -126,7 +125,8 @@ const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 20,
     borderColor: '#FCDB98',
-    height: Dimensions.get("window").width - 40,
+    height: (Dimensions.get("window").width - 40) * 3 / 4,
+    width: Dimensions.get("window").width - 40,
     marginHorizontal: 20,
     borderWidth: 3
   },

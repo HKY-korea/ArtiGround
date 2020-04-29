@@ -13,7 +13,6 @@ import RegisterScreen from './SignUp/RegisterScreen';
 import HomeScreen from './Home/HomeScreen';
 import PostScreen from './Post/PostScreen';
 import ProfileScreen from './Profile/ProfileScreen';
-import AddProfileScreen from './Profile/AddProfileScreen';
 import ProfileDetailScreen from './ProfileDetail/ProfileDetailScreen';
 import SearchScreen from './Search/SearchScreen';
 import LoadingScreen from './Loading/LoadingScreen';
@@ -106,12 +105,6 @@ const ProfileStack = createStackNavigator(
         },
         ProfileDetail: {
             screen: ProfileDetailScreen
-        },
-        AddProfile: {
-            screen: AddProfileScreen,
-            navigationOptions: {
-                headerShown: false
-            }
         }
     }
 )

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, Image, Dimensions, Keyboard } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, Dimensions, Keyboard, AsyncStorage } from 'react-native';
 import { Button } from 'native-base';
 
 import image from '../constants/image';
 
 import * as firebase from 'firebase';
+import axios from 'axios';
+
 
 class LoginScreen extends Component {
     constructor() {
@@ -12,19 +14,44 @@ class LoginScreen extends Component {
         this.state = {
             email: '',
             password: '',
-            errorMessage: null
+            errorMessage: null,
+            token: ''
         }
     }
 
-    handleLogin = () => {
-        const { email, password } = this.state
+    // handleLogin = () => {
+    //     const { email, password } = this.state
 
-        Keyboard.dismiss()
+    //     Keyboard.dismiss()
   
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .catch(error => this.setState({ errorMessage: error.message }))
+    //     firebase
+    //         .auth()
+    //         .signInWithEmailAndPassword(email, password)
+    //         .catch(error => this.setState({ errorMessage: error.message }))
+    // }
+
+    handleLogin = async() => {
+        const { email, password } = this.state;
+        const body = {
+            email: email, 
+            password: password
+        }
+        Keyboard.dismiss();
+
+        axios
+            .post('http://52.205.45.114:3000/api/auth/login', body)
+            .then(res => {
+                // console.log("리스폰스  :", res.data.token);
+                // AsyncStorage.setItem("token", res.data.token);
+                // const getToken = AsyncStorage.getItem("token");
+                // console.log("리스폰스  :", getToken);
+                this.setState({
+                    token: res.data.token
+                })
+            })
+        await AsyncStorage.setItem("token", this.state.token)
+        const getToken = await AsyncStorage.getItem("token");
+        console.log("리스폰스데이터 : ", getToken)
     }
 
     render() {
